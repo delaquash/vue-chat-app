@@ -1,11 +1,28 @@
 <template>
-  <h1>Hello, World</h1>
+  <div class="view login">
+      <form class="login-form">
+        <div class="form-inner">
+           <h1>Login to firechat</h1>
+        <label for="username">Username</label>
+        <input type="text" placeholder="Please enter your username..." />
+        <input type="submit" value="Login" />
+        </div>
+      </form>
+  </div>
+  
+  <div class="view-chat">
+    
+  </div>
 </template>
 
 <script>
+import db from './db'
 
 
 export default {
+  setup() {
+    return {}
+  }
 }
 </script>
 
