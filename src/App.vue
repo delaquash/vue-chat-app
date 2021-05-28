@@ -2,19 +2,35 @@
   <div class="view login" v-if="state.username === ''|| state.username === null">
       <form class="login-form" @submit.prevent="Login">
         <div class="form-inner">
-           <h1>Login to firechat</h1>
+           <h1>Login to Vuechat</h1>
         <label for="username">Username</label>
         <input 
           type="text" 
           v-model="inputUsername"
-          placeholder="Please enter your username..." />
-        <input type="submit" value="Login" />
+          placeholder="Please enter your username..." 
+        />
+        <input 
+          type="submit" 
+          value="Login" 
+        />
         </div>
       </form>
   </div>
   
-  <div class="view-chat" v-else>
-    <h1>Chat view</h1>
+  <div class="view chat" v-else>
+    <header>
+      <button class="logout"></button>
+      <h1>Welcome, {{ state.username }}</h1>
+    </header>
+    <section class="chat-box">
+      <!-- Message -->
+    </section>
+    <footer>
+      <form @submit.prevent="">
+          <input type="text"  placeholder="Write a message....">
+          <input type="submit" value="Send">
+      </form>
+    </footer>
   </div>
 </template>
 
