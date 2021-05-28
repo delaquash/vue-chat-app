@@ -26,9 +26,16 @@
       <!-- Message -->
     </section>
     <footer>
-      <form @submit.prevent="">
-          <input type="text"  placeholder="Write a message....">
-          <input type="submit" value="Send">
+      <form @submit.prevent="SendMessage">
+          <input 
+              type="text"  
+              placeholder="Write a message...." 
+              v-model="inputMessage"
+              />
+          <input 
+              type="submit" 
+              value="Send" 
+          />
       </form>
     </footer>
   </div>
@@ -36,12 +43,13 @@
 
 <script>
 import { reactive, onMounted, ref } from 'vue';
-import db from './db'
+import db from './db';
 
 
 export default {
   setup() {
     const inputUsername = ref("");
+    const inputMessage = ref("")
 
     const state = reactive({
       username: "",
@@ -56,12 +64,33 @@ export default {
       }
     }
 
+    const SendMessage = ()=> {
+      // connecting sent message to firebase db
+      const messagesRef = db.database().ref("messages");
+        if(inputMessage.value === "" || inputMessage.value === null) {
+          return;
+    }
+
+    const message = {
+      username: state.username,
+      content: inputMessage.value
+    }
+    // to send the message
+      messagesRef.push(message);
+
+      // To clear after submission
+      inputMessage.value="";
+
+}
     return {
       inputUsername,
+      inputMessage,
       Login,
-      state
+      state,
+      SendMessage
     }
   }
+
 }
 </script>
 
