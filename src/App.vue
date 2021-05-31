@@ -1,3 +1,7 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable no-mixed-spaces-and-tabs */
+/* eslint-disable no-mixed-spaces-and-tabs */
 <template>
   <div class="view login" v-if="state.username === ''|| state.username === null">
       <form class="login-form" @submit.prevent="Login">
@@ -85,7 +89,20 @@ export default {
 
 onMounted(() => {
   const messagesRef = db.database().ref("messages");
-  messagesRef.on('value')
+  messagesRef.on('value', snapshot => {
+	  const data = snapshot.val();
+	  let messages = [];
+
+	  Object.keys(data).forEach(key => {
+	 // eslint-disable-next-line no-mixed-spaces-and-tabs
+	 messages.push({
+			  id: key,
+			  username: data[key].username,
+			  content: data[key].content
+			  
+		  })
+	  })
+  })
 })
     return {
       inputUsername,
