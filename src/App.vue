@@ -82,6 +82,11 @@ export default {
       inputMessage.value="";
 
 }
+
+onMounted(() => {
+  const messagesRef = db.database().ref("messages");
+  messagesRef.on('value')
+})
     return {
       inputUsername,
       inputMessage,
